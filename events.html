@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>活动报名 - 渔乐圈</title>
+  <style>
+/* ========================================
+   钓鱼活动平台 - 全局样式
+   ======================================== */
+
+:root {
+  --primary-color: #f472b6;
+  --primary-dark: #ec4899;
+  --primary-light: #f9a8d4;
+  --secondary-color: #fbbf24;
+  --accent-color: #f687b3;
+  --bg-light: #fff1f2;
+  --bg-white: #ffffff;
+  --text-dark: #2d3748;
+  --text-medium: #4a5568;
+  --text-light: #718096;
+  --border-color: #fce7f3;
+  --shadow: 0 4px 6px -1px rgba(244, 114, 182, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(244, 114, 182, 0.15);
+  --radius: 12px;
+  --radius-lg: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ========================================
+   导航栏
+   ======================================== */
+.navbar {
+  background: var(--bg-white);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.logo-icon {
+  font-size: 2rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-medium);
+  font-weight: 500;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--primary-color);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-color);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* ========================================
+   按钮样式
+   ======================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #b7791f;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-small {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+}
+
+.btn-large {
+  padding: 16px 32px;
+  font-size: 1.125rem;
+}
+
+/* ========================================
+   Hero 区域
+   ======================================== */
+.hero {
+  background: linear-gradient(135deg, #fbcfe8 0%, #f9a8d4 100%);
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '🎣';
+  position: absolute;
+  font-size: 300px;
+  opacity: 0.05;
+  right: -50px;
+  bottom: -50px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.hero p {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* ========================================
+   统计数据
+   ======================================== */
+.stats {
+  background: var(--bg-white);
+  padding: 60px 0;
+  margin-top: -50px;
+  position: relative;
+  z-index: 10;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-lg);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  text-align: center;
+}
+
+.stat-item h3 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+
+.stat-item p {
+  color: var(--text-light);
+}
+
+/* ========================================
+   卡片组件
+   ======================================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: linear-gradient(135deg, #fbcfe8 0%, #f9a8d4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.card-content {
+  padding: 25px;
+}
+
+.card-tag {
+  display: inline-block;
+  background: #fce7f3;
+  color: #db2777;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.card p {
+  color: var(--text-medium);
+  margin-bottom: 15px;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-light);
+  font-size: 0.875rem;
+}
+
+.card-footer {
+  padding: 15px 25px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ========================================
+   区块标题
+   ======================================== */
+.section {
+  padding: 80px 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+}
+
+.section-header p {
+  color: var(--text-medium);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   功能特性
+   ======================================== */
+.features {
+  background: var(--bg-white);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.feature-item {
+  text-align: center;
+  padding: 30px;
+  border-radius: var(--radius-lg);
+  transition: background 0.3s;
+}
+
+.feature-item:hover {
+  background: var(--bg-light);
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #f9a8d4 0%, #f472b6 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin: 0 auto 20px;
+}
+
+.feature-item h3 {
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.feature-item p {
+  color: var(--text-medium);
+}
+
+/* ========================================
+   活动列表
+   ======================================== */
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.event-item {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s;
+}
+
+.event-item:hover {
+  transform: translateX(5px);
+}
+
+.event-date {
+  text-align: center;
+  min-width: 80px;
+}
+
+.event-date .day {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.event-date .month {
+  color: var(--text-light);
+  font-size: 0.875rem;
+}
+
+.event-info {
+  flex: 1;
+}
+
+.event-info h3 {
+  margin-bottom: 8px;
+  color: var(--text-dark);
+}
+
+.event-info p {
+  color: var(--text-medium);
+  margin-bottom: 10px;
+}
+
+.event-meta {
+  display: flex;
+  gap: 20px;
+  color: var(--text-light);
+  font-size: 0.875rem;
+}
+
+.event-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.event-status {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-open {
+  background: #fce7f3;
+  color: #db2777;
+}
+
+.status-full {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+.status-ended {
+  background: #e2e8f0;
+  color: var(--text-light);
+}
+
+/* ========================================
+   评论区
+   ======================================== */
+.comments-section {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.comment-form {
+  margin-bottom: 30px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+}
+
+.comment-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comment-item {
+  display: flex;
+  gap: 15px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.comment-item:last-child {
+  border-bottom: none;
+}
+
+.comment-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f9a8d4 0%, #f472b6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.comment-author {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.comment-time {
+  color: var(--text-light);
+  font-size: 0.875rem;
+}
+
+.comment-text {
+  color: var(--text-medium);
+}
+
+/* ========================================
+   登录/注册表单
+   ======================================== */
+.auth-container {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.auth-box {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+}
+
+.auth-box h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.auth-box .subtitle {
+  text-align: center;
+  color: var(--text-medium);
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 0.875rem;
+}
+
+.form-options label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-medium);
+  cursor: pointer;
+}
+
+.form-options a {
+  color: var(--primary-color);
+}
+
+.form-options a:hover {
+  text-decoration: underline;
+}
+
+.auth-box .btn {
+  width: 100%;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-medium);
+}
+
+.auth-footer a {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* ========================================
+   装备筛选
+   ======================================== */
+.filter-bar {
+  background: var(--bg-white);
+  padding: 20px;
+  border-radius: var(--radius);
+  margin-bottom: 30px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-bar select {
+  padding: 10px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: white;
+  cursor: pointer;
+}
+
+.filter-bar input[type="search"] {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+
+/* ========================================
+   页脚
+   ======================================== */
+.footer {
+  background: var(--primary-dark);
+  color: white;
+  padding: 60px 0 30px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-brand h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.footer-brand p {
+  opacity: 0.8;
+  line-height: 1.8;
+}
+
+.footer-links h4 {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 30px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+@media (max-width: 768px) {
+  .navbar .container {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 15px 20px;
+  }
+  
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 20px;
+  }
+  
+  .hero {
+    padding: 60px 0;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .event-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .event-meta {
+    justify-content: center;
+  }
+  
+  .section-header h2 {
+    font-size: 1.75rem;
+  }
+}
+
+/* ========================================
+   动画效果
+   ======================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* 加载动画 */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+</style>
+  <style>
+    .events-hero {
+      background: linear-gradient(rgba(249, 168, 212, 0.95), rgba(244, 114, 182, 0.98));
+    }
+    
+    .event-tabs {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid var(--border-color);
+    }
+    
+    .event-tab {
+      padding: 15px 25px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-light);
+      position: relative;
+      transition: color 0.3s;
+    }
+    
+    .event-tab:hover,
+    .event-tab.active {
+      color: var(--primary-color);
+    }
+    
+    .event-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary-color);
+    }
+    
+    .event-calendar {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .calendar-header h3 {
+      font-size: 1.25rem;
+      color: var(--text-dark);
+    }
+    
+    .calendar-nav {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .calendar-nav button {
+      background: var(--bg-light);
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background 0.3s;
+    }
+    
+    .calendar-nav button:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      text-align: center;
+    }
+    
+    .calendar-day-header {
+      font-weight: 600;
+      color: var(--text-medium);
+      padding: 10px;
+    }
+    
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+    
+    .calendar-day:hover {
+      background: var(--bg-light);
+    }
+    
+    .calendar-day.has-event {
+      background: var(--bg-light);
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    
+    .calendar-day.has-event::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      width: 5px;
+      height: 5px;
+      background: var(--secondary-color);
+      border-radius: 50%;
+    }
+    
+    .calendar-day.today {
+      border: 2px solid var(--primary-color);
+    }
+    
+    .event-detail-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .event-detail-content {
+      background: white;
+      border-radius: var(--radius-lg);
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    
+    .event-detail-header {
+      background: linear-gradient(135deg, #f9a8d4 0%, #f472b6 100%);
+      color: white;
+      padding: 40px;
+      position: relative;
+    }
+    
+    .event-detail-header h2 {
+      font-size: 1.75rem;
+      margin-bottom: 15px;
+    }
+    
+    .event-detail-body {
+      padding: 30px;
+    }
+    
+    .event-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .event-info-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    
+    .event-info-text h4 {
+      margin-bottom: 5px;
+      color: var(--text-dark);
+    }
+    
+    .event-info-text p {
+      color: var(--text-medium);
+    }
+    
+    .event-detail-footer {
+      padding: 20px 30px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .price-tag {
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+      font-weight: bold;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .close-modal:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    
+    .registration-form {
+      display: none;
+      background: var(--bg-light);
+      padding: 30px;
+      border-radius: var(--radius);
+      margin-top: 20px;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">🎣</span>
+        <span>渔乐圈</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="guides.html">钓鱼攻略</a></li>
+        <li><a href="events.html" class="active">活动报名</a></li>
+        <li><a href="gear.html">装备推荐</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-primary btn-small">登录 / 注册</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero 区域 -->
+  <section class="hero events-hero">
+    <div class="container">
+      <h1>墨尔本精彩钓鱼活动</h1>
+      <p>参与本地比赛、交流技巧、结识墨尔本华人钓友</p>
+    </div>
+  </section>
+
+  <!-- 活动区域 -->
+  <section class="section">
+    <div class="container">
+      <!-- 活动标签页 -->
+      <div class="event-tabs">
+        <button class="event-tab active" data-tab="upcoming">即将开始</button>
+        <button class="event-tab" data-tab="ongoing">正在进行</button>
+        <button class="event-tab" data-tab="myevents">我的活动</button>
+      </div>
+      
+      <!-- 活动日历 -->
+      <div class="event-calendar">
+        <div class="calendar-header">
+          <h3>📅 2024年3月墨尔本活动日历</h3>
+          <div class="calendar-nav">
+            <button>◀</button>
+            <button>▶</button>
+          </div>
+        </div>
+        <div class="calendar-grid">
+          <div class="calendar-day-header">日</div>
+          <div class="calendar-day-header">一</div>
+          <div class="calendar-day-header">二</div>
+          <div class="calendar-day-header">三</div>
+          <div class="calendar-day-header">四</div>
+          <div class="calendar-day-header">五</div>
+          <div class="calendar-day-header">六</div>
+          
+          <div class="calendar-day">25</div>
+          <div class="calendar-day">26</div>
+          <div class="calendar-day">27</div>
+          <div class="calendar-day">28</div>
+          <div class="calendar-day today">15</div>
+          <div class="calendar-day">16</div>
+          <div class="calendar-day">17</div>
+          <div class="calendar-day">18</div>
+          <div class="calendar-day">19</div>
+          <div class="calendar-day">20</div>
+          <div class="calendar-day">21</div>
+          <div class="calendar-day">22</div>
+          <div class="calendar-day">23</div>
+          <div class="calendar-day">24</div>
+          <div class="calendar-day has-event">25</div>
+          <div class="calendar-day has-event">26</div>
+          <div class="calendar-day">27</div>
+          <div class="calendar-day has-event">28</div>
+          <div class="calendar-day">29</div>
+          <div class="calendar-day">30</div>
+          <div class="calendar-day">31</div>
+        </div>
+      </div>
+      
+      <!-- 活动列表 -->
+      <div class="event-list" id="eventList">
+        <!-- 大型比赛 -->
+        <div class="event-item">
+          <div class="event-date">
+            <div class="day">25</div>
+            <div class="month">3月</div>
+          </div>
+          <div class="event-info">
+            <span class="card-tag" style="margin-bottom: 8px; display: inline-block;">大型比赛</span>
+            <h3>Autumn Snapper Fishing Competition</h3>
+            <p>秋季Snapper钓鱼比赛，在Port Phillip Bay举行，欢迎所有墨尔本钓友参加！丰厚奖品等你赢取。</p>
+            <div class="event-meta">
+              <span>📍 Port Phillip Bay</span>
+              <span>👥 35/50 人</span>
+              <span>🏆 奖品丰富</span>
+            </div>
+          </div>
+          <span class="event-status status-open">报名中</span>
+          <button class="btn btn-primary btn-register" onclick="showEventDetail('xihu')">查看详情</button>
+        </div>
+        
+        <!-- 亲子活动 -->
+        <div class="event-item">
+          <div class="event-date">
+            <div class="day">28</div>
+            <div class="month">3月</div>
+          </div>
+          <div class="event-info">
+            <span class="card-tag" style="margin-bottom: 8px; display: inline-block; background: #e0f2fe; color: #0369a1;">亲子活动</span>
+            <h3>Albert Park Family Fishing</h3>
+            <p>带孩子来Albert Park体验钓鱼乐趣，适合初学者的亲子活动。专业教练指导，提供全套装备。</p>
+            <div class="event-meta">
+              <span>📍 Albert Park Lake</span>
+              <span>👥 18/25 组家庭</span>
+              <span>👨‍👩‍👧 适合6-12岁儿童</span>
+            </div>
+          </div>
+          <span class="event-status status-open">报名中</span>
+          <button class="btn btn-primary btn-register" onclick="showEventDetail('qizi')">查看详情</button>
+        </div>
+        
+        <!-- 技术分享 -->
+        <div class="event-item">
+          <div class="event-date">
+            <div class="day">02</div>
+            <div class="month">4月</div>
+          </div>
+          <div class="event-info">
+            <span class="card-tag" style="margin-bottom: 8px; display: inline-block; background: #f3e8ff; color: #7c3aed;">技术分享</span>
+            <h3>Squid Fishing Workshop</h3>
+            <p>鱿鱼钓法分享会，学习如何在St Kilda Pier钓取美味的Southern Calamari！</p>
+            <div class="event-meta">
+              <span>📍 St Kilda Pier</span>
+              <span>👥 15/20 人</span>
+              <span>🦑 鱿鱼专题</span>
+            </div>
+          </div>
+          <span class="event-status status-open">报名中</span>
+          <button class="btn btn-primary btn-register" onclick="showEventDetail('yediao')">查看详情</button>
+        </div>
+        
+        <!-- 装备测评 -->
+        <div class="event-item">
+          <div class="event-date">
+            <div class="day">06</div>
+            <div class="month">4月</div>
+          </div>
+          <div class="event-info">
+            <span class="card-tag" style="margin-bottom: 8px; display: inline-block; background: #ecfdf5; color: #059669;">装备测评</span>
+            <h3>Shimano新品体验会</h3>
+            <p>Shimano 2024新品钓具试用体验，现场有专业测评师讲解选购技巧，参与者可获得精美礼品。</p>
+            <div class="event-meta">
+              <span>📍 Dandenong Fishing Store</span>
+              <span>👥 20/30 人</span>
+              <span>🎁 到场有礼</span>
+            </div>
+          </div>
+          <span class="event-status status-open">报名中</span>
+          <button class="btn btn-primary btn-register" onclick="showEventDetail('zhuangbei')">查看详情</button>
+        </div>
+        
+        <!-- 已经结束的活动 -->
+        <div class="event-item">
+          <div class="event-date">
+            <div class="day">10</div>
+            <div class="month">3月</div>
+          </div>
+          <div class="event-info">
+            <span class="card-tag" style="margin-bottom: 8px; display: inline-block;">大型比赛</span>
+            <h3>Summer Snapper Challenge</h3>
+            <p>夏季Snapper挑战赛圆满结束，感谢所有参与者的支持！我们钓获了超过50条Snapper。</p>
+            <div class="event-meta">
+              <span>📍 Port Phillip Bay</span>
+              <span>👥 28人参与</span>
+              <span>✅ 已结束</span>
+            </div>
+          </div>
+          <span class="event-status status-ended">已结束</span>
+          <button class="btn btn-outline btn-small" onclick="showEventDetail('funv')">查看回顾</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 活动详情弹窗 -->
+  <div class="event-detail-modal" id="eventModal">
+    <div class="event-detail-content">
+      <div class="event-detail-header">
+        <button class="close-modal" onclick="closeEventModal()">✕</button>
+        <h2 id="modalTitle">活动标题</h2>
+        <p id="modalSubtitle">活动副标题描述</p>
+      </div>
+      <div class="event-detail-body">
+        <div class="event-info-item">
+          <div class="event-info-icon">📅</div>
+          <div class="event-info-text">
+            <h4>活动时间</h4>
+            <p id="modalTime">2024年3月25日 07:00 - 17:00</p>
+          </div>
+        </div>
+        <div class="event-info-item">
+          <div class="event-info-icon">📍</div>
+          <div class="event-info-text">
+            <h4>活动地点</h4>
+            <p id="modalLocation">浙江省杭州市西湖风景区</p>
+          </div>
+        </div>
+        <div class="event-info-item">
+          <div class="event-info-icon">👥</div>
+          <div class="event-info-text">
+            <h4>参与人数</h4>
+            <p id="modalPeople">限额200人，已报名128人</p>
+          </div>
+        </div>
+        <div class="event-info-item">
+          <div class="event-info-icon">📝</div>
+          <div class="event-info-text">
+            <h4>活动介绍</h4>
+            <p id="modalDesc">活动详细介绍...</p>
+          </div>
+        </div>
+        
+        <!-- 报名表单 -->
+        <div class="registration-form" id="regForm">
+          <h4 style="margin-bottom: 20px;">填写报名信息</h4>
+          <form onsubmit="submitRegistration(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>姓名 *</label>
+                <input type="text" required placeholder="请输入真实姓名">
+              </div>
+              <div class="form-group">
+                <label>手机号 *</label>
+                <input type="tel" required placeholder="请输入手机号码">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>身份证</label>
+                <input type="text" placeholder="用于购买保险（选填）">
+              </div>
+              <div class="form-group">
+                <label>紧急联系人电话</label>
+                <input type="tel" placeholder="选填">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>备注</label>
+              <textarea placeholder="如有特殊需求请在此说明" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius); resize: vertical;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">确认报名</button>
+          </form>
+        </div>
+      </div>
+      <div class="event-detail-footer">
+        <span class="price-tag" id="modalPrice">免费</span>
+        <button class="btn btn-primary btn-large" id="modalRegisterBtn" onclick="toggleRegistration()">立即报名</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>🎣 渔乐圈 - 墨尔本</h3>
+          <p>专注服务墨尔本华人钓鱼爱好者的社区平台。</p>
+          <p style="margin-top: 15px; opacity: 0.9;">📕 小红书号：<strong>billy188299916</strong></p>
+        </div>
+        <div class="footer-links">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="guides.html">钓鱼攻略</a></li>
+            <li><a href="events.html">活动报名</a></li>
+            <li><a href="gear.html">装备推荐</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 渔乐圈 - 钓鱼爱好者活动平台. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+/**
+ * 钓鱼活动平台 - 主要JavaScript功能
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+  // 初始化所有功能
+  initMobileNav();
+  initScrollEffects();
+  initCommentSystem();
+  initEventRegistration();
+  initLoginForm();
+  initGearFilters();
+});
+
+/**
+ * 移动端导航菜单
+ */
+function initMobileNav() {
+  const nav = document.querySelector('.nav-links');
+  
+  // 检查是否已有移动菜单按钮
+  if (!document.querySelector('.mobile-menu-btn')) {
+    const menuBtn = document.createElement('button');
+    menuBtn.className = 'mobile-menu-btn';
+    menuBtn.innerHTML = '☰';
+    menuBtn.style.cssText = `
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--primary-color);
+    `;
+    
+    // 在移动端显示
+    const style = document.createElement('style');
+    style.textContent = `
+      @media (max-width: 768px) {
+        .mobile-menu-btn {
+          display: block !important;
+        }
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 70px;
+          left: 0;
+          right: 0;
+          background: white;
+          flex-direction: column;
+          padding: 20px;
+          box-shadow: var(--shadow);
+        }
+        .nav-links.active {
+          display: flex;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    document.querySelector('.navbar .container').appendChild(menuBtn);
+    
+    menuBtn.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+  }
+}
+
+/**
+ * 滚动效果
+ */
+function initScrollEffects() {
+  // 导航栏滚动效果
+  const navbar = document.querySelector('.navbar');
+  let lastScroll = 0;
+  
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 100) {
+      navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+    } else {
+      navbar.style.boxShadow = 'var(--shadow)';
+    }
+    
+    lastScroll = currentScroll;
+  });
+  
+  // 元素进入视口时的动画
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  // 检查浏览器是否支持 IntersectionObserver
+  if (!('IntersectionObserver' in window)) {
+    // 不支持则直接显示所有元素
+    document.querySelectorAll('.card, .feature-item, .event-item').forEach(el => {
+      el.style.opacity = '1';
+    });
+    return;
+  }
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in');
+        entry.target.style.opacity = '1';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  
+  document.querySelectorAll('.card, .feature-item, .event-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.3s ease-out';
+    observer.observe(el);
+  });
+  
+  // 如果3秒后还有元素没显示，强制显示（保险机制）
+  setTimeout(() => {
+    document.querySelectorAll('.card, .feature-item, .event-item').forEach(el => {
+      if (el.style.opacity === '0') {
+        el.style.opacity = '1';
+      }
+    });
+  }, 3000);
+}
+
+/**
+ * 评论系统
+ */
+function initCommentSystem() {
+  const commentForm = document.querySelector('.comment-form form');
+  const commentList = document.querySelector('.comment-list');
+  
+  if (!commentForm || !commentList) return;
+  
+  // 模拟评论数据 - 墨尔本钓友真实风格
+  const comments = [
+    {
+      author: 'David Chen',
+      avatar: 'DC',
+      time: '2小时前',
+      content: '上周六去了Port Phillip Bay钓Snapper，用了攻略里的paternoster rig，钓了3条，最大的一条快2kg！感谢分享 🎣'
+    },
+    {
+      author: 'Jenny Wang',
+      avatar: 'JW',
+      time: '5小时前',
+      content: '有人知道现在St Kilda Pier的Squid还多吗？上周去扑了个空，是不是时间不对？求指点'
+    },
+    {
+      author: 'Michael Liu',
+      avatar: 'ML',
+      time: '1天前',
+      content: '刚申请了fishing licence，年度$37.2挺划算的。提醒大家记得同时买Trout permit如果去Yarra River，上次被罚了$200教训惨痛 😭'
+    },
+    {
+      author: 'Sam Zhang',
+      avatar: 'SZ',
+      time: '2天前',
+      content: 'Western Port的Gummy Shark确实多，上周在Phillip Island附近钓了一条8kg的！用的新鲜salmon fillet做饵，效果杠杠的 👍'
+    },
+    {
+      author: 'Emma Li',
+      avatar: 'EL',
+      time: '3天前',
+      content: '新手求问：想去Albert Park带孩子钓鱼，需要准备什么装备？有适合7岁孩子的鱼竿推荐吗？'
+    }
+  ];
+  
+  // 渲染评论
+  function renderComments() {
+    commentList.innerHTML = comments.map(comment => `
+      <div class="comment-item">
+        <div class="comment-avatar">${comment.avatar}</div>
+        <div class="comment-content">
+          <div class="comment-header">
+            <span class="comment-author">${comment.author}</span>
+            <span class="comment-time">${comment.time}</span>
+          </div>
+          <p class="comment-text">${comment.content}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+  
+  renderComments();
+  
+  // 提交新评论
+  commentForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const textarea = this.querySelector('textarea');
+    const content = textarea.value.trim();
+    
+    if (!content) {
+      showToast('请输入评论内容', 'error');
+      return;
+    }
+    
+    // 添加新评论
+    comments.unshift({
+      author: '我',
+      avatar: '我',
+      time: '刚刚',
+      content: content
+    });
+    
+    renderComments();
+    textarea.value = '';
+    showToast('评论发布成功！', 'success');
+  });
+}
+
+/**
+ * 活动报名
+ */
+function initEventRegistration() {
+  document.querySelectorAll('.btn-register').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const eventItem = this.closest('.event-item');
+      const eventTitle = eventItem?.querySelector('h3')?.textContent || '活动';
+      
+      // 检查是否已登录（模拟）
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      
+      if (!isLoggedIn) {
+        if (confirm('请先登录后再报名。是否前往登录页面？')) {
+          window.location.href = 'login.html';
+        }
+        return;
+      }
+      
+      // 模拟报名
+      if (this.textContent === '立即报名') {
+        this.textContent = '已报名';
+        this.classList.remove('btn-primary');
+        this.classList.add('btn-outline');
+        showToast(`成功报名：${eventTitle}`, 'success');
+        
+        // 保存报名状态
+        const registeredEvents = JSON.parse(localStorage.getItem('registeredEvents') || '[]');
+        registeredEvents.push(eventTitle);
+        localStorage.setItem('registeredEvents', JSON.stringify(registeredEvents));
+      } else {
+        this.textContent = '立即报名';
+        this.classList.remove('btn-outline');
+        this.classList.add('btn-primary');
+        showToast('已取消报名', 'info');
+      }
+    });
+  });
+  
+  // 恢复报名状态
+  const registeredEvents = JSON.parse(localStorage.getItem('registeredEvents') || '[]');
+  document.querySelectorAll('.event-item').forEach(item => {
+    const title = item.querySelector('h3')?.textContent;
+    const btn = item.querySelector('.btn-register');
+    if (title && registeredEvents.includes(title) && btn) {
+      btn.textContent = '已报名';
+      btn.classList.remove('btn-primary');
+      btn.classList.add('btn-outline');
+    }
+  });
+}
+
+/**
+ * 登录表单
+ */
+function initLoginForm() {
+  const loginForm = document.querySelector('#loginForm');
+  const registerForm = document.querySelector('#registerForm');
+  
+  if (loginForm) {
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = this.querySelector('#email').value;
+      const password = this.querySelector('#password').value;
+      
+      // 模拟登录验证
+      if (email && password) {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userEmail', email);
+        showToast('登录成功！', 'success');
+        
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1000);
+      } else {
+        showToast('请填写完整的登录信息', 'error');
+      }
+    });
+  }
+  
+  if (registerForm) {
+    registerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const password = this.querySelector('#password').value;
+      const confirmPassword = this.querySelector('#confirmPassword').value;
+      
+      if (password !== confirmPassword) {
+        showToast('两次输入的密码不一致', 'error');
+        return;
+      }
+      
+      localStorage.setItem('isLoggedIn', 'true');
+      showToast('注册成功！', 'success');
+      
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1000);
+    });
+  }
+  
+  // 更新导航栏显示登录状态
+  updateNavLoginState();
+}
+
+/**
+ * 更新导航栏登录状态
+ */
+function updateNavLoginState() {
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+  const navActions = document.querySelector('.nav-actions');
+  
+  if (navActions && isLoggedIn) {
+    const userEmail = localStorage.getItem('userEmail') || '用户';
+    navActions.innerHTML = `
+      <span style="color: var(--text-medium);">👤 ${userEmail.split('@')[0]}</span>
+      <a href="#" class="btn btn-outline btn-small" onclick="logout(); return false;">退出</a>
+    `;
+  }
+}
+
+/**
+ * 退出登录
+ */
+function logout() {
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('userEmail');
+  showToast('已退出登录', 'info');
+  setTimeout(() => {
+    window.location.reload();
+  }, 500);
+}
+
+/**
+ * 装备筛选
+ */
+function initGearFilters() {
+  const filterSelects = document.querySelectorAll('.filter-bar select');
+  const searchInput = document.querySelector('.filter-bar input[type="search"]');
+  const gearCards = document.querySelectorAll('.gear-card');
+  
+  if (!gearCards.length) return;
+  
+  function filterGear() {
+    const category = document.querySelector('#categoryFilter')?.value || 'all';
+    const price = document.querySelector('#priceFilter')?.value || 'all';
+    const search = searchInput?.value.toLowerCase() || '';
+    
+    gearCards.forEach(card => {
+      const cardCategory = card.dataset.category;
+      const cardPrice = parseInt(card.dataset.price);
+      const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+      
+      let show = true;
+      
+      if (category !== 'all' && cardCategory !== category) {
+        show = false;
+      }
+      
+      if (price !== 'all') {
+        if (price === 'low' && cardPrice > 200) show = false;
+        if (price === 'mid' && (cardPrice < 200 || cardPrice > 500)) show = false;
+        if (price === 'high' && cardPrice < 500) show = false;
+      }
+      
+      if (search && !cardTitle.includes(search)) {
+        show = false;
+      }
+      
+      card.style.display = show ? 'block' : 'none';
+    });
+  }
+  
+  filterSelects.forEach(select => {
+    select.addEventListener('change', filterGear);
+  });
+  
+  if (searchInput) {
+    searchInput.addEventListener('input', filterGear);
+  }
+}
+
+/**
+ * 显示提示消息
+ */
+function showToast(message, type = 'info') {
+  // 移除已有toast
+  const existingToast = document.querySelector('.toast');
+  if (existingToast) {
+    existingToast.remove();
+  }
+  
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  
+  const colors = {
+    success: '#38a169',
+    error: '#e53e3e',
+    info: '#3182ce'
+  };
+  
+  const icons = {
+    success: '✓',
+    error: '✗',
+    info: 'ℹ'
+  };
+  
+  toast.style.cssText = `
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    background: ${colors[type]};
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease-out;
+  `;
+  
+  toast.innerHTML = `
+    <span style="font-size: 1.2rem;">${icons[type]}</span>
+    <span>${message}</span>
+  `;
+  
+  // 添加动画样式
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+  
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.animation = 'slideIn 0.3s ease-out reverse';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+/**
+ * 添加到收藏
+ */
+function addToFavorites(itemName) {
+  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+  
+  if (!favorites.includes(itemName)) {
+    favorites.push(itemName);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    showToast(`已添加到收藏：${itemName}`, 'success');
+  } else {
+    showToast('该物品已在收藏夹中', 'info');
+  }
+}
+
+/**
+ * 分享功能
+ */
+function shareContent(title, text) {
+  if (navigator.share) {
+    navigator.share({
+      title: title,
+      text: text,
+      url: window.location.href
+    }).catch(() => {
+      // 用户取消分享
+    });
+  } else {
+    // 复制链接到剪贴板
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      showToast('链接已复制到剪贴板', 'success');
+    });
+  }
+}
+
+/**
+ * 加载更多内容
+ */
+function loadMore(containerSelector, items) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+  
+  items.forEach(item => {
+    const element = document.createElement('div');
+    element.innerHTML = item;
+    element.classList.add('fade-in');
+    container.appendChild(element);
+  });
+}
+
+</script>
+  <script>
+    // 活动数据
+    const eventsData = {
+      xihu: {
+        title: 'Autumn Snapper Fishing Competition',
+        subtitle: '秋季Snapper钓鱼比赛',
+        time: '2024年3月22日 06:00 - 16:00',
+        location: 'Port Phillip Bay, Melbourne',
+        people: '限额50人，已报名35人',
+        price: '报名费 $20',
+        desc: '秋季是Snapper最活跃的季节，本次比赛将在Port Phillip Bay举行。设立一等奖1名（Shimano鱼轮）、二等奖2名（钓鱼装备套装）、三等奖3名（鱼饵礼包）。所有参赛者均可获得纪念品。比赛规则：船钓或岸钓，以Snapper总重量排名。'
+      },
+      qizi: {
+        title: 'Albert Park Family Fishing',
+        subtitle: '亲子钓鱼体验活动',
+        time: '2024年3月30日 09:00 - 13:00',
+        location: 'Albert Park Lake, Melbourne VIC 3206',
+        people: '限额25组家庭，已报名18组',
+        price: '$30/组（1大1小）',
+        desc: '本次活动专为6-12岁儿童及其家长设计，适合钓鱼新手。专业教练将教授基础钓鱼技巧、鱼类知识和环保理念。费用包含：钓具租赁、鱼饵、保险、纪念品。Albert Park Lake是墨尔本市中心的绝佳淡水钓点，主要目标鱼种包括Trout和Redfin。'
+      },
+      yediao: {
+        title: 'Squid Fishing Workshop',
+        subtitle: '鱿鱼钓法专题分享',
+        time: '2024年4月6日 17:00 - 19:00',
+        location: 'St Kilda Pier, St Kilda VIC 3182',
+        people: '限额20人，已报名15人',
+        price: '$10/人',
+        desc: 'Southern Calamari是维州最受欢迎的目标鱼种之一。本次workshop将在St Kilda Pier实地教学，包括鱿鱼钓具选择、钓法技巧、最佳时间和天气判断。参与者请自备钓竿（可用普通路亚竿替代），主办方提供鱿鱼钩和鱼饵。'
+      },
+      zhuangbei: {
+        title: 'Shimano新品体验会',
+        subtitle: '2024 Shimano新品抢先体验',
+        time: '2024年4月13日 10:00 - 15:00',
+        location: 'Dandenong Fishing Store, Dandenong VIC 3175',
+        people: '限额30人，已报名20人',
+        price: '免费（需提前预约）',
+        desc: 'Shimano Australia带来2024最新钓具系列，包括Tiagra海钓轮、Sephia鱿鱼竿等新品。现场可试用体验，专业顾问讲解产品特点。到场即可领取Shimano纪念品，还有机会抽取价值$200的钓具礼品！'
+      },
+      funv: {
+        title: 'Summer Snapper Challenge',
+        subtitle: '夏季Snapper挑战赛回顾',
+        time: '2024年2月15日 06:00 - 16:00',
+        location: 'Port Phillip Bay, Melbourne',
+        people: '28人参与',
+        price: '已结束',
+        desc: '感谢所有参与者的支持！本次挑战赛我们共钓获超过50条Snapper，最大的Snapper重达3.2公斤。冠军由David Chen获得，他在Western Port Bay钓获了总重量12.5公斤的Snapper。活动照片已上传至社区相册。'
+      }
+    };
+    
+    let currentEvent = null;
+    
+    function showEventDetail(eventId) {
+      const event = eventsData[eventId];
+      if (!event) return;
+      
+      currentEvent = eventId;
+      document.getElementById('modalTitle').textContent = event.title;
+      document.getElementById('modalSubtitle').textContent = event.subtitle;
+      document.getElementById('modalTime').textContent = event.time;
+      document.getElementById('modalLocation').textContent = event.location;
+      document.getElementById('modalPeople').textContent = event.people;
+      document.getElementById('modalPrice').textContent = event.price;
+      document.getElementById('modalDesc').textContent = event.desc;
+      
+      const regBtn = document.getElementById('modalRegisterBtn');
+      if (event.price === '已结束') {
+        regBtn.style.display = 'none';
+      } else {
+        regBtn.style.display = 'block';
+        regBtn.textContent = '立即报名';
+      }
+      
+      document.getElementById('regForm').style.display = 'none';
+      document.getElementById('eventModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeEventModal() {
+      document.getElementById('eventModal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    
+    function toggleRegistration() {
+      const regForm = document.getElementById('regForm');
+      const btn = document.getElementById('modalRegisterBtn');
+      
+      if (regForm.style.display === 'none') {
+        regForm.style.display = 'block';
+        btn.textContent = '收起表单';
+        regForm.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        regForm.style.display = 'none';
+        btn.textContent = '立即报名';
+      }
+    }
+    
+    function submitRegistration(e) {
+      e.preventDefault();
+      showToast('报名成功！我们会通过短信发送详细信息。', 'success');
+      setTimeout(() => {
+        closeEventModal();
+      }, 1500);
+    }
+    
+    // 点击模态框外部关闭
+    document.getElementById('eventModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeEventModal();
+      }
+    });
+    
+    // 标签页切换
+    document.querySelectorAll('.event-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.event-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        const tabType = this.dataset.tab;
+        // 这里可以根据不同标签显示不同内容
+        // 简化起见，暂时不改变内容
+      });
+    });
+  </script>
+</body>
+</html>
